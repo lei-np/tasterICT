@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  body, html {
+    margin: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background: black;
+  }
+
+  /* Screenshot container */
+  .site-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .site-screenshot {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  /* ===== Small login icon (initial state) ===== */
+  #phish-demo-btn {
+    position: absolute;
+
+    /* 🎯 Adjust ONLY these to align with real login */
+    left: 75%;
+    top: 10.3%;
+
+    transform: translate(-50%, -50%);
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #5e2b97;
+    color: white;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  }
+
+  #phish-demo-btn:hover {
+    background: #0056b3;
+  }
+
+  /* ===== Dark overlay ===== */
+  #phish-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    display: none;
+    z-index: 20;
+  }
+
+  /* ===== Centered phishing box ===== */
+  #phish-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 340px;
+    background: white;
+    border-radius: 10px;
+    padding: 22px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.55);
+  }
+
+  #phish-box h2 {
+    margin-top: 0;
+  }
+
+  #phish-box input {
+    width: 100%;
+    padding: 8px;
+    margin: 6px 0;
+    border-radius: 4px;
+    border: 1px solid #aaa;
+  }
+
+  #phish-box button {
+    width: 100%;
+    padding: 9px;
+    margin-top: 10px;
+    border: none;
+    background: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  #phish-box button:hover {
+    background: #0056b3;
+  }
+
+  #phish-warning {
+    display: none;
+    margin-top: 12px;
+    font-size: 13px;
+    background: #fff3cd;
+    border-left: 4px solid #ff9800;
+    padding: 10px;
+  }
+
+  #phish-close {
+    background: #666;
+    margin-top: 12px;
+  }
+
+  #phish-close:hover {
+    background: #444;
+  }
+
+  /* Training label */
+  .demo-label {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background: crimson;
+    color: white;
+    padding: 6px 10px;
+    font-size: 12px;
+    z-index: 9999;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="site-container">
+  <img src="screenshot.png" class="site-screenshot" alt="Website Screenshot">
+
+  <!-- Small trigger icon -->
+  <div id="phish-demo-btn" onclick="openPhishDemo()">👤</div>
+</div>
+
+<!-- Overlay + centered box -->
+<div id="phish-overlay" onclick="closePhishDemo()">
+  <div id="phish-box" onclick="event.stopPropagation()">
+    <h2>Register</h2>
+    <p style="font-size:13px;opacity:0.8;">
+      Cybersecurity Awareness Taster Class<br>
+      No data is stored or transmitted
+    </p>
+
+    <input type="text" placeholder="Username">
+    <input type="password" placeholder="Password">
+
+    <button onclick="runPhishDemo()">Sign In</button>
+
+    <div id="phish-warning">
+      ⚠️ <b>Phishing Demonstration</b><br><br>
+      In a real attack:
+      <br>• Credentials would be sent to attackers
+      <br>• You would not see this warning
+      <br><br>
+      Phishing exploits <b>human trust</b>, not hacking skills.
+    </div>
+
+    <button id="phish-close" onclick="closePhishDemo()">Close</button>
+  </div>
+</div>
+
+<div class="demo-label">PHISHING DEMO – TRAINING ONLY</div>
+
+<script>
+  function openPhishDemo() {
+    document.getElementById("phish-overlay").style.display = "block";
+    document.getElementById("phish-warning").style.display = "none";
+  }
+
+  function closePhishDemo() {
+    document.getElementById("phish-overlay").style.display = "none";
+  }
+
+  function runPhishDemo() {
+    document.getElementById("phish-warning").style.display = "block";
+  }
+</script>
+
+</body>
+</html>
